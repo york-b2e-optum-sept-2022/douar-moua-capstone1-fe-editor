@@ -1,4 +1,11 @@
-<app-survey
-  *ngFor="let surveyData of surveyList"
-  [survey]="surveyData"
-></app-survey>
+<!--<div id="container">-->
+  <div class="d-flex justify-content-center m-3">
+    <h3>List of Surveys</h3>
+  </div>
+
+  <app-survey
+    class="d-flex justify-content-center"
+    *ngFor="let surveyData of surveyList"
+    [survey]="surveyData"
+  ></app-survey>
+<!--</div>-->

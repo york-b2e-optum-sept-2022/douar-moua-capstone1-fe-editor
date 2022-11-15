@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SurveyService} from "../../services/survey.service";
+import {ISurvey} from "../../_Interfaces/ISurvey";
 
 @Component({
   selector: 'app-survey-list',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SurveyListComponent implements OnInit {
 
-  constructor() { }
+  surveyList: ISurvey[] = []
+
+  constructor(private surveyService: SurveyService) {
+    this.surveyService.$surveyList.subscribe(
+      surveyList => {this.surveyList = surveyList}
+    )
+  }
 
   ngOnInit(): void {
   }

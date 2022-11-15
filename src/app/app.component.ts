@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SurveyService} from "./services/survey.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'douar-moua-capstone1-fe-editor';
+
+  constructor(private surveyService: SurveyService) {}
+
+  ngOnInit(): void {
+    this.surveyService.getSurveyList()
+  }
 }

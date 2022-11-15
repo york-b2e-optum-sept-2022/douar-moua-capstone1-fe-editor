@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ISurvey} from "../../_Interfaces/ISurvey";
 
 @Component({
   selector: 'app-survey',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./survey.component.css']
 })
 export class SurveyComponent implements OnInit {
+
+  @Input() survey!: ISurvey;
 
   constructor() { }
 

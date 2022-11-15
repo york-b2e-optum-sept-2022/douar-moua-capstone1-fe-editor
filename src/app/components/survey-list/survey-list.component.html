@@ -1,1 +1,4 @@
-<p>survey-list works!</p>
+<app-survey
+  *ngFor="let surveyData of surveyList"
+  [survey]="surveyData"
+></app-survey>

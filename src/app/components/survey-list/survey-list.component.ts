@@ -22,6 +22,7 @@ export class SurveyListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
+
   ngOnDestroy(): void {
     this.surveyListSub.unsubscribe();
   }

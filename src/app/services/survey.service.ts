@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
-import {BehaviorSubject, first} from "rxjs";
+import {BehaviorSubject, first, Subject} from "rxjs";
 import {ISurvey} from "../_Interfaces/ISurvey";
 
 @Injectable({
@@ -10,6 +10,9 @@ export class SurveyService {
 
   public $surveyList = new BehaviorSubject<ISurvey[]>([])
   public $survey = new BehaviorSubject<ISurvey | null>(null)
+
+  public viewSurveyList: boolean = false
+  public $viewSurveyList = new Subject<boolean>()
 
   constructor(private httpService: HttpService) { }
 
@@ -33,6 +36,44 @@ export class SurveyService {
       error: err => {
         console.error(err)
         alert("Unable to get survey, please try again later.")
+      }
+    })
+  }
+
+  public deleteSurveyById(surveyId: number){
+    this.httpService.deleteSurveyById(surveyId).pipe(first()).subscribe({
+      next: () => {
+        let surveyList: ISurvey[] = [...this.$surveyList.getValue()];
+        this.$surveyList.next(
+          surveyList.filter(survey => survey.id !== surveyId)
+        )
+        this.$viewSurveyList.next(this.viewSurveyList)
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to delete survey, please try again later.")
+      }
+    })
+  }
+
+  public saveEditSurvey(updateSurvey: ISurvey){
+    console.log(updateSurvey)
+    this.httpService.saveEditSurvey(updateSurvey).pipe(first()).subscribe({
+      next: updatedSurvey => {
+        let surveyList: ISurvey[] = [...this.$surveyList.getValue()];
+
+        this.$surveyList.next(
+          surveyList.map(survey => {
+            if (survey.id !== updateSurvey.id){
+              return survey
+            }
+            return updatedSurvey
+          })
+        )
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to save edits to survey, please try again later.")
       }
     })
   }

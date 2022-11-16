@@ -14,19 +14,31 @@ export class SurveyComponent implements OnInit, OnDestroy {
   survey!: ISurvey;
   surveySub: Subscription;
 
+  isEditingSurvey: boolean = false
+
   constructor(private questionService: QuestionService, private surveyService: SurveyService) {
     this.surveySub = surveyService.$survey.subscribe(
       survey => this.survey = <ISurvey>survey)
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onDeleteSurveyClick() {
+    this.surveyService.deleteSurveyById(this.survey.id)
   }
 
   ngOnDestroy(): void {
     this.surveySub.unsubscribe()
   }
 
-  onDeleteSurveyClick() {
-    console.log("delete clicked!")
+  toggleEditClick() {
+    this.isEditingSurvey = !this.isEditingSurvey
   }
+
+  onSaveSurveyEditClick(){
+    console.log(this.survey)
+    this.surveyService.saveEditSurvey(this.survey)
+    this.toggleEditClick()
+  }
+
 }

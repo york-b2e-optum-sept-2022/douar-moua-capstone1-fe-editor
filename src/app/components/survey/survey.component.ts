@@ -26,4 +26,7 @@ export class SurveyComponent implements OnInit, OnDestroy {
     this.surveySub.unsubscribe()
   }
 
+  onDeleteSurveyClick() {
+    console.log("delete clicked!")
+  }
 }

@@ -1,3 +1,13 @@
+<div class="d-flex justify-content-center">
+  <button
+    class="btn btn-danger"
+    style="margin-right: 2rem; width: 9rem"
+    (click)="onDeleteSurveyClick()"
+  >Delete Survey
+  </button>
+  <button class="btn btn-warning" style="width: 9rem">Edit Survey</button>
+</div>
+
 <div class="text-center mt-5">
   <h3>SURVEY TITLE: <br> {{survey.title | json | uppercase | slice: 1:-1}}</h3>
 </div>
@@ -5,6 +15,7 @@
 <div>
   <app-question-list></app-question-list>
 </div>
+
 
 
 

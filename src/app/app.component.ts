@@ -13,6 +13,8 @@ export class AppComponent {
   viewSurvey:boolean = false
   viewSurveySub: Subscription
 
+  creatingSurvey: boolean = false
+
   constructor(private surveyService: SurveyService) {
     this.viewSurveySub = this.surveyService.$viewSurveyList.subscribe(
       viewSurvey => this.viewSurvey = viewSurvey
@@ -25,5 +27,13 @@ export class AppComponent {
 
   toggleViewSurveyClick(viewSurvey: boolean) {
     this.viewSurvey = viewSurvey
+  }
+
+  toggleCreateSurveyClick() {
+    this.creatingSurvey = !this.creatingSurvey
+  }
+
+  cancelCreateSurvey(cancelCreate: boolean) {
+    this.creatingSurvey = cancelCreate
   }
 }

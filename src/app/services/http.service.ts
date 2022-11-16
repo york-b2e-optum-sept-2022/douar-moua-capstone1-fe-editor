@@ -27,8 +27,13 @@ export class HttpService {
     return this.httpClient.delete(`http://localhost:8080/api/survey?surveyId=${surveyId}`)
   }
 
-  public saveEditSurvey(survey: ISurvey){
-    console.log(survey)
+  public saveEditSurvey(updateSurvey: ISurvey){
+    console.log(updateSurvey)
+    return this.httpClient.put('http://localhost:8080/api/survey',
+      {
+        id: updateSurvey.id,
+        title: updateSurvey.title
+      }) as Observable<ISurvey>
   }
 
   // --- QUESTIONS STUFF ---

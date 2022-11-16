@@ -56,9 +56,26 @@ export class SurveyService {
     })
   }
 
-  public saveEditSurvey(survey: ISurvey){
-    console.log(survey)
-    this.httpService.saveEditSurvey(survey)
+  public saveEditSurvey(updateSurvey: ISurvey){
+    console.log(updateSurvey)
+    this.httpService.saveEditSurvey(updateSurvey).pipe(first()).subscribe({
+      next: updatedSurvey => {
+        let surveyList: ISurvey[] = [...this.$surveyList.getValue()];
+
+        this.$surveyList.next(
+          surveyList.map(survey => {
+            if (survey.id !== updateSurvey.id){
+              return survey
+            }
+            return updatedSurvey
+          })
+        )
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to save edits to survey, please try again later.")
+      }
+    })
   }
 
 }

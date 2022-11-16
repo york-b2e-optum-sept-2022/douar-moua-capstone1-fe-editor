@@ -56,4 +56,8 @@ export class SurveyService {
     })
   }
 
+  public saveEditSurveyById(surveyId: number){
+    console.log(surveyId)
+  }
+
 }

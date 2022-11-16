@@ -9,9 +9,15 @@ import {SurveyService} from "./services/survey.service";
 export class AppComponent {
   title = 'douar-moua-capstone1-fe-editor';
 
+  viewSurvey:boolean = false
+
   constructor(private surveyService: SurveyService) {}
 
   ngOnInit(): void {
     this.surveyService.getSurveyList()
+  }
+
+  toggleViewSurveyClick(viewSurvey: boolean) {
+    this.viewSurvey = viewSurvey
   }
 }

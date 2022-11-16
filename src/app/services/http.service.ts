@@ -16,6 +16,11 @@ export class HttpService {
     ) as Observable<ISurvey[]>
   }
 
+  public getSurveyById(surveyId: number){
+    return this.httpClient.get(`http://localhost:8080/api/survey?surveyId=${surveyId}`
+    ) as Observable<ISurvey>
+  }
+
   public getSurveyQuestionList(surveyId: number){
     return this.httpClient.get(`http://localhost:8080/api/question?surveyId=${surveyId}`
     ) as Observable<IQuestion[]>

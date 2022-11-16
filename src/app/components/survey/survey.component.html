@@ -1,15 +1,11 @@
-<div class="card m-3" style="width: 50%">
-
-  <div class="card-header text-center">
-    ID: {{survey.id}} | {{survey.title | uppercase}}
-  </div>
-
-  <div class="card-body m-3 text-center">
-    <app-question-list></app-question-list>
-  </div>
-
+<div class="text-center mt-5">
+  <h3>SURVEY TITLE: <br> {{survey.title | json | uppercase | slice: 1:-1}}</h3>
 </div>
 
-<!--TODO-->
-<!--Render Question-List in Survey component -->
-<!--Question-List is then going to render each individual question-->
+<div>
+  <app-question-list></app-question-list>
+</div>
+
+
+
+

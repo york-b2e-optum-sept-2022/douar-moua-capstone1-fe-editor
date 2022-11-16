@@ -9,6 +9,7 @@ import {ISurvey} from "../_Interfaces/ISurvey";
 export class SurveyService {
 
   public $surveyList = new BehaviorSubject<ISurvey[]>([])
+  public $survey = new BehaviorSubject<ISurvey | null>(null)
 
   constructor(private httpService: HttpService) { }
 
@@ -20,6 +21,18 @@ export class SurveyService {
       error: err => {
         console.error(err)
         alert("Unable to get list of surveys, please try again later.")
+      }
+    })
+  }
+
+  public getSurveyById(surveyId: number){
+    this.httpService.getSurveyById(surveyId).pipe(first()).subscribe({
+      next: survey => {
+        this.$survey.next(survey)
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to get survey, please try again later.")
       }
     })
   }

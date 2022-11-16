@@ -56,8 +56,9 @@ export class SurveyService {
     })
   }
 
-  public saveEditSurveyById(surveyId: number){
-    console.log(surveyId)
+  public saveEditSurvey(survey: ISurvey){
+    console.log(survey)
+    this.httpService.saveEditSurvey(survey)
   }
 
 }

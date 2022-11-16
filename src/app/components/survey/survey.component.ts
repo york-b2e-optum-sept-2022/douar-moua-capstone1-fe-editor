@@ -36,8 +36,9 @@ export class SurveyComponent implements OnInit, OnDestroy {
   }
 
   onSaveSurveyEditClick(){
-    console.log(this.survey.id)
-    this.surveyService.saveEditSurveyById(this.survey.id)
+    console.log(this.survey)
+    this.surveyService.saveEditSurvey(this.survey)
+    this.toggleEditClick()
   }
 
 }

@@ -27,6 +27,10 @@ export class HttpService {
     return this.httpClient.delete(`http://localhost:8080/api/survey?surveyId=${surveyId}`)
   }
 
+  public saveEditSurvey(survey: ISurvey){
+    console.log(survey)
+  }
+
   // --- QUESTIONS STUFF ---
 
   public getSurveyQuestionList(surveyId: number){

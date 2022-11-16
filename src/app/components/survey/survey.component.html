@@ -32,11 +32,13 @@
 </div>
 
 <div class="text-center mt-5">
-  <h3>SURVEY TITLE: <div *ngIf="isEditingSurvey==false">{{survey.title | json | uppercase | slice: 1:-1}}</div></h3>
-  <input *ngIf="isEditingSurvey==true" [(ngModel)]="survey.title">
+  <h3>SURVEY TITLE:
+    <div *ngIf="isEditingSurvey==false">{{survey.title | json | uppercase | slice: 1:-1}}</div>
+  </h3>
+  <input class="m-3" *ngIf="isEditingSurvey==true" [(ngModel)]="survey.title">
 </div>
 
-<div>
+<div class="container" style="border: solid black thin">
   <app-question-list></app-question-list>
 </div>
 

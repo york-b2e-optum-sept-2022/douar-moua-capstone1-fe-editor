@@ -1,3 +1,8 @@
+<div *ngIf="viewSurvey==false" class="text-center" style="background: lightgray; padding: 5rem; margin: 1rem">
+  <h1>Welcome, Editor</h1>
+  <p>Manage Surveys Here</p>
+</div>
+
 <div *ngIf="viewSurvey==false">
   <app-survey-list
     (viewSurvey)="toggleViewSurveyClick($event)"
@@ -5,10 +10,9 @@
 </div>
 
 <div *ngIf="viewSurvey==true">
-  <div class="d-flex justify-content-end m-3">
+  <div class="d-flex justify-content-end m-3" style="background: lightgray; padding: 1rem">
     <button class="btn btn-primary" (click)="toggleViewSurveyClick(false)">Back to List of Surveys</button>
   </div>
-  <hr>
   <app-survey></app-survey>
 </div>
 

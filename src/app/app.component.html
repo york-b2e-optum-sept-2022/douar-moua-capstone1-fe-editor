@@ -1,1 +1,13 @@
-<app-survey-list></app-survey-list>
+<div *ngIf="viewSurvey==false">
+  <app-survey-list
+    (viewSurvey)="toggleViewSurveyClick($event)"
+  ></app-survey-list>
+</div>
+
+<div *ngIf="viewSurvey==true">
+  <div class="d-flex justify-content-end m-3">
+    <button class="btn btn-primary" (click)="toggleViewSurveyClick(false)">Back to List of Surveys</button>
+  </div>
+  <app-survey></app-survey>
+</div>
+

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {SurveyService} from "./services/survey.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,13 @@ export class AppComponent {
   title = 'douar-moua-capstone1-fe-editor';
 
   viewSurvey:boolean = false
+  viewSurveySub: Subscription
 
-  constructor(private surveyService: SurveyService) {}
+  constructor(private surveyService: SurveyService) {
+    this.viewSurveySub = this.surveyService.$viewSurveyList.subscribe(
+      viewSurvey => this.viewSurvey = viewSurvey
+    )
+  }
 
   ngOnInit(): void {
     this.surveyService.getSurveyList()

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {ISurvey} from "../../_Interfaces/ISurvey";
 import {QuestionService} from "../../services/question.service";
 import {SurveyService} from "../../services/survey.service";
@@ -19,14 +19,14 @@ export class SurveyComponent implements OnInit, OnDestroy {
       survey => this.survey = <ISurvey>survey)
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onDeleteSurveyClick() {
+    console.log("delete clicked!")
+    this.surveyService.deleteSurveyById(this.survey.id)
   }
 
   ngOnDestroy(): void {
     this.surveySub.unsubscribe()
-  }
-
-  onDeleteSurveyClick() {
-    console.log("delete clicked!")
   }
 }

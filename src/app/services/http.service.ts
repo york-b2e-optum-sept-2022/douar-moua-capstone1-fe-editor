@@ -13,6 +13,15 @@ export class HttpService {
 
   // --- SURVEY STUFF ---
 
+  public createNewSurvey(newSurvey: ISurvey){
+    console.log(newSurvey)
+    return this.httpClient.post('http://localhost:8080/api/survey',
+      {
+        id: newSurvey.id,
+        title: newSurvey.title
+      }) as Observable<ISurvey>
+  }
+
   public getSurveyList(){
     return this.httpClient.get('http://localhost:8080/api/survey/all-survey'
     ) as Observable<ISurvey[]>

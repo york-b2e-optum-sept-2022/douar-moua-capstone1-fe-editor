@@ -8,6 +8,7 @@
 
 <!--CREATE NEW SURVEY-->
 
+<!--toggle create survey-->
 <div *ngIf="creatingSurvey==false && viewSurvey==false" class="text-center">
   <button
     class="btn btn-primary"
@@ -36,6 +37,7 @@
 
 <div *ngIf="viewSurvey==true">
   <div class="d-flex justify-content-end m-3" style="background: lightgray; padding: 1rem">
+<!--    toggle back to survey list-->
     <button class="btn btn-primary" (click)="toggleViewSurveyClick(false)">Back to List of Surveys</button>
   </div>
   <app-survey></app-survey>

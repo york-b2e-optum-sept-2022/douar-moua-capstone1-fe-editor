@@ -2,11 +2,73 @@
   <h2>Create New Survey</h2> <br>
 </div>
 
+
+
+<!-- --- CANCEL / SAVE BUTTONS --- -->
+
 <div class="d-flex justify-content-center">
   <button
     class="btn btn-warning m-3"
-    (click)="cancelCreateSurvey()"
+    (click)="cancelCreateSurveyClick()"
   >Cancel
   </button>
-  <button class="btn btn-success m-3">Create</button>
+  <button class="btn btn-success m-3" (click)="onCreateSurveyClick()">Create</button>
+</div>
+
+
+
+<!-- --- SURVEY INPUT --- -->
+
+<div class="container" style="border: solid black thin; padding: 2rem">
+
+<!--  SURVEY TITLE INPUT-->
+  <div class="d-flex justify-content-center">
+    <div class="input-group m-3">
+      <span class="input-group-text">Survey Title</span>
+      <input type="text" class="form-control" [(ngModel)]="newSurvey.title">
+    </div>
+  </div>
+
+<!--  ADD QUESTION BUTTON-->
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-primary m-3">Add a Question</button>
+  </div>
+
+<!--  QUESTION INPUT & RESPONSE TYPE SELECTION/INPUT-->
+  <div class="container" style="border: solid black thin; padding: 2rem">
+<!--    QUESTION INPUT-->
+    <div id="boolean-input" class="d-flex justify-content-center">
+      <div class="input-group m-3">
+        <span class="input-group-text">Question:</span>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+<!--    RESPONSE SELECTION/INPUT-->
+    <div class="text-center">
+      <p>Select Type of Response</p>
+      <div class="d-flex justify-content-center">
+
+        <div style="margin-right: 3rem">
+          <input type="checkbox">
+          <label>&nbsp;True/False</label>
+        </div>
+
+        <div style="margin-right: 3rem">
+          <input type="checkbox">
+          <label>&nbsp;Multiple-Choice</label> <br>
+        </div>
+
+        <div style="margin-right: 3rem">
+          <input type="checkbox">
+          <label>&nbsp;Text</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
 </div>

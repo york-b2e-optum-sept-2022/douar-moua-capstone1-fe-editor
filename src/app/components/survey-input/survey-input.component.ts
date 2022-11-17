@@ -3,6 +3,7 @@ import {ISurvey} from "../../_Interfaces/ISurvey";
 import {SurveyService} from "../../services/survey.service";
 import {IQuestion} from "../../_Interfaces/IQuestion";
 import {QuestionService} from "../../services/question.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-survey-input',
@@ -19,7 +20,13 @@ export class SurveyInputComponent implements OnInit {
     title: ""
   }
 
-  constructor(private surveyService: SurveyService, private questionService: QuestionService) { }
+  savedNewSurveyTitleCheck: number = 0
+
+  listQuestionInput: IQuestion[] = []
+  // listQuestionInputSub: Subscription
+
+  constructor(private surveyService: SurveyService, private questionService: QuestionService) {
+  }
 
   ngOnInit(): void {
   }
@@ -29,11 +36,22 @@ export class SurveyInputComponent implements OnInit {
   }
 
   onCreateSurveyClick(){
+    if (this.savedNewSurveyTitleCheck < 1){
+      alert("Please give survey a title and click save!")
+      return;
+    }
+
     if (this.newSurvey.title == ""){
       alert("Please give survey a title!")
       return;
     }
 
+    if (this.listQuestionInput.length < 1){
+      alert("Must add at least one question to the survey!")
+      return
+    }
+
+    // TODO: MOVE THIS TO SAVE TITLE NAME
     let newSurveyId: number = new Date().getTime()
     let newSurvey: ISurvey = {
       id: newSurveyId,
@@ -52,7 +70,28 @@ export class SurveyInputComponent implements OnInit {
       surveyOwner: 0,
       prompt: ""
     }
+
+    this.listQuestionInput.push(newQuestion)
     console.log(newQuestion)
+    console.log(this.listQuestionInput)
     this.questionService.addQuestionToNewSurvey(newQuestion)
   }
+
+  onSaveNewSurveyTitleClick() {
+    if (this.newSurvey.title == ""){
+      alert("Please give survey a title!")
+      return;
+    }
+
+
+    console.log(this.newSurvey.title)
+    this.savedNewSurveyTitleCheck = this.savedNewSurveyTitleCheck + 1
+    alert("New Survey Title has been saved! You can now add questions!")
+
+
+  }
+
+  // ngOnDestroy(): void {
+  //   this.listQuestionInputSub.unsubscribe()
+  // }
 }

@@ -9,6 +9,7 @@ import {IQuestion} from "../_Interfaces/IQuestion";
 export class QuestionService {
 
   public $questionList = new BehaviorSubject<IQuestion[]>([])
+  public $newQuestionList = new BehaviorSubject<IQuestion[]>([])
 
   constructor(private httpService: HttpService) { }
 
@@ -23,5 +24,13 @@ export class QuestionService {
       }
     })
   }
+
+  public addQuestionToNewSurvey(newQuestion: IQuestion){
+    let questionList: IQuestion[] = [...this.$newQuestionList.getValue()];
+    questionList.push(newQuestion)
+    console.log(questionList)
+    return this.$newQuestionList.next(questionList)
+  }
+
 
 }

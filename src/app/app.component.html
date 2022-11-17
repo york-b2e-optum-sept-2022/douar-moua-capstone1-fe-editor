@@ -1,14 +1,45 @@
-<div *ngIf="viewSurvey==false">
+<!--MAIN PAGE HEADER-->
+
+<div *ngIf="viewSurvey==false && creatingSurvey==false" class="text-center" style="background: lightgray; padding: 5rem; margin: 1rem">
+  <h1>Welcome, Editor</h1>
+  <p>Manage Surveys Here</p>
+</div>
+
+
+<!--CREATE NEW SURVEY-->
+
+<!--toggle create survey-->
+<div *ngIf="creatingSurvey==false && viewSurvey==false" class="text-center">
+  <button
+    class="btn btn-primary"
+    style="margin-top: 3rem"
+    (click)="toggleCreateSurveyClick()"
+  >Create New Survey</button>
+</div>
+
+<div *ngIf="creatingSurvey==true">
+  <app-survey-input
+    (creatingSurvey)="cancelCreateSurvey($event)"
+  ></app-survey-input>
+</div>
+
+<!--SURVEY LIST-->
+
+<div *ngIf="viewSurvey==false && creatingSurvey == false">
   <app-survey-list
     (viewSurvey)="toggleViewSurveyClick($event)"
   ></app-survey-list>
 </div>
 
+
+
+<!--VIEW INDIVIDUAL SURVEY-->
+
 <div *ngIf="viewSurvey==true">
-  <div class="d-flex justify-content-end m-3">
+  <div class="d-flex justify-content-end m-3" style="background: lightgray; padding: 1rem">
+<!--    toggle back to survey list-->
     <button class="btn btn-primary" (click)="toggleViewSurveyClick(false)">Back to List of Surveys</button>
   </div>
-  <hr>
   <app-survey></app-survey>
 </div>
 

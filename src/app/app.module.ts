@@ -9,6 +9,9 @@ import { SurveyComponent } from './components/survey/survey.component';
 import { SurveyListComponent } from './components/survey-list/survey-list.component';
 import { QuestionComponent } from './components/question/question.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
+import { SurveyInputComponent } from './components/survey-input/survey-input.component';
+import { QuestionInputComponent } from './components/question-input/question-input.component';
+import { QuestionInputListComponent } from './components/question-input-list/question-input-list.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { QuestionListComponent } from './components/question-list/question-list.
     SurveyComponent,
     SurveyListComponent,
     QuestionComponent,
-    QuestionListComponent
+    QuestionListComponent,
+    SurveyInputComponent,
+    QuestionInputComponent,
+    QuestionInputListComponent
   ],
   imports: [
     BrowserModule,

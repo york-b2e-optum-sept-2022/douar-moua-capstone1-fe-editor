@@ -16,6 +16,21 @@ export class SurveyService {
 
   constructor(private httpService: HttpService) { }
 
+  public createNewSurvey(newSurvey: ISurvey){
+
+    this.httpService.createNewSurvey(newSurvey).pipe(first()).subscribe({
+      next: newSurvey => {
+        let surveyList: ISurvey[] = [...this.$surveyList.getValue()];
+        surveyList.push(newSurvey);
+        this.$surveyList.next(surveyList)
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to create new survey, please try again later.")
+      }
+    })
+  }
+
   public getSurveyList(){
     this.httpService.getSurveyList().pipe(first()).subscribe({
       next: surveyList => {

@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ISurvey} from "../../_Interfaces/ISurvey";
 import {SurveyService} from "../../services/survey.service";
+import {IQuestion} from "../../_Interfaces/IQuestion";
+import {QuestionService} from "../../services/question.service";
 
 @Component({
   selector: 'app-survey-input',
@@ -17,7 +19,7 @@ export class SurveyInputComponent implements OnInit {
     title: ""
   }
 
-  constructor(private surveyService: SurveyService) { }
+  constructor(private surveyService: SurveyService, private questionService: QuestionService) { }
 
   ngOnInit(): void {
   }
@@ -40,5 +42,17 @@ export class SurveyInputComponent implements OnInit {
 
     console.log(this.newSurvey)
     this.surveyService.createNewSurvey(newSurvey)
+  }
+
+  onAddNewQuestionToNewSurveyClick(){
+
+    let newQuestionId: number = new Date().getTime()
+    let newQuestion: IQuestion = {
+      id: newQuestionId,
+      surveyOwner: 0,
+      prompt: ""
+    }
+    console.log(newQuestion)
+    this.questionService.addQuestionToNewSurvey(newQuestion)
   }
 }

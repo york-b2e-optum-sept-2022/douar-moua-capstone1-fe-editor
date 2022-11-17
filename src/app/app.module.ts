@@ -10,6 +10,7 @@ import { SurveyListComponent } from './components/survey-list/survey-list.compon
 import { QuestionComponent } from './components/question/question.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { SurveyInputComponent } from './components/survey-input/survey-input.component';
+import { QuestionInputComponent } from './question-input/question-input.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SurveyInputComponent } from './components/survey-input/survey-input.com
     SurveyListComponent,
     QuestionComponent,
     QuestionListComponent,
-    SurveyInputComponent
+    SurveyInputComponent,
+    QuestionInputComponent
   ],
   imports: [
     BrowserModule,

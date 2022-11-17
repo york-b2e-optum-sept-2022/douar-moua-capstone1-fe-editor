@@ -31,7 +31,14 @@ export class SurveyInputComponent implements OnInit {
       alert("Please give survey a title!")
       return;
     }
+
+    let newSurveyId: number = new Date().getTime()
+    let newSurvey: ISurvey = {
+      id: newSurveyId,
+      title: this.newSurvey.title
+    }
+
     console.log(this.newSurvey)
-    this.surveyService.createNewSurvey(this.newSurvey)
+    this.surveyService.createNewSurvey(newSurvey)
   }
 }

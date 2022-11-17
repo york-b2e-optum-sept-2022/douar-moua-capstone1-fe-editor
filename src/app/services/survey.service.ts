@@ -18,12 +18,6 @@ export class SurveyService {
 
   public createNewSurvey(newSurvey: ISurvey){
 
-    let surveyId: number = new Date().getTime()
-    newSurvey = {
-      id: surveyId,
-      title: newSurvey.title
-    }
-
     this.httpService.createNewSurvey(newSurvey).pipe(first()).subscribe({
       next: newSurvey => {
         let surveyList: ISurvey[] = [...this.$surveyList.getValue()];

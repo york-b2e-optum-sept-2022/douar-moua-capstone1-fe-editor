@@ -49,6 +49,11 @@ export class SurveyInputComponent implements OnInit {
 
   onAddNewQuestionToNewSurveyClick(){
 
+    if(this.savedNewSurveyTitleCheck < 1){
+      alert("Please add a survey title and click save before adding questions!")
+      return
+    }
+
     let newQuestionId: number = new Date().getTime()
     let newQuestion: IQuestion = {
       id: newQuestionId,

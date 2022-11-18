@@ -5,28 +5,21 @@
   <div id="boolean-input" class="d-flex justify-content-center">
     <div class="input-group m-3">
       <span class="input-group-text">Question:</span>
-      <input type="text" class="form-control" required>
+      <input type="text" class="form-control" [(ngModel)]="newQuestion.prompt">
     </div>
   </div>
-  <!--    RESPONSE SELECTION/INPUT-->
+
+<!--  RESPONSE TYPE SELECTION/INPUT-->
   <div class="text-center">
-    <p>Select Type of Response</p>
-    <div class="d-flex justify-content-center">
-
-      <div style="margin-right: 3rem">
-        <input type="checkbox">
-        <label>&nbsp;True/False</label>
-      </div>
-
-      <div style="margin-right: 3rem">
-        <input type="checkbox">
-        <label>&nbsp;Multiple-Choice</label> <br>
-      </div>
-
-      <div style="margin-right: 3rem">
-        <input type="checkbox">
-        <label>&nbsp;Text</label>
-      </div>
+    <label for="response-type">Select Type of Response Required For Question: </label>
+    <div>
+      <select [(ngModel)]="newQuestion.responseType" name="response-type" id="response-type">
+        <option value="boolean response" [ngValue]="booleanResponse">True/False</option>
+        <option value="multi-choice response" [ngValue]="multiResponse">Multiple-Choice</option>
+        <option value="text response" [ngValue]="textResponse">Text</option>
+      </select>
     </div>
   </div>
 </div>
+
+<!--  <button (click)="checkInputs()">Check Inputs</button>-->

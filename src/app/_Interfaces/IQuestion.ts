@@ -1,6 +1,8 @@
+import {ISurvey} from "./ISurvey";
+
 export interface IQuestion{
   id?: number,
-  surveyOwner: number,
+  surveyOwner: ISurvey,
   prompt: string,
   answer?: string
 }

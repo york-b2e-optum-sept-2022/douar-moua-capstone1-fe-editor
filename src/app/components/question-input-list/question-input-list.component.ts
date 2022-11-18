@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IQuestion} from "../../_Interfaces/IQuestion";
 import {QuestionService} from "../../services/question.service";
 import {Subscription} from "rxjs";
@@ -12,6 +12,8 @@ export class QuestionInputListComponent implements OnInit, OnDestroy {
 
   listQuestionInput: IQuestion[] = []
   listQuestionInputSub: Subscription
+
+  // @Input() createNewSurveyClicked: boolean = true
 
   constructor(private questionService: QuestionService) {
     this.listQuestionInputSub = this.questionService.$newQuestionList.subscribe(

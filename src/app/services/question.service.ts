@@ -25,7 +25,7 @@ export class QuestionService {
     })
   }
 
-  public addQuestionToNewSurvey(newQuestion: IQuestion){
+  public addQuestionToNewSurveyDisplay(newQuestion: IQuestion){
     let questionList: IQuestion[] = [...this.$newQuestionList.getValue()];
     questionList.push(newQuestion)
     console.log(questionList)

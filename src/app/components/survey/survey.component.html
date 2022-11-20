@@ -1,32 +1,20 @@
 <div class="d-flex justify-content-center">
   <div *ngIf="isEditingSurvey==false">
     <button
-      class="btn btn-danger"
-      style="margin-right: 2rem; width: 9rem"
-      (click)="onDeleteSurveyClick()"
-    >Delete Survey
+      class="btn btn-danger" style="margin-right: 2rem; width: 9rem" (click)="onDeleteSurveyClick()">Delete Survey
     </button>
     <button
-      class="btn btn-warning"
-      style="width: 9rem"
-      (click)="toggleEditClick()"
-    >Edit Survey
+      class="btn btn-warning" style="width: 9rem" (click)="onEditSurveyClick()">Edit Survey
     </button>
   </div>
   <div *ngIf="isEditingSurvey==true">
     <p class="text-center" style="color: red">Editing In Progress</p>
     <p class="text-center" style="color: red">Be sure to click "Save" or edits won't be saved!</p>
     <button
-      class="btn btn-warning"
-      style="margin-right: 2rem; width: 9rem"
-      (click)="toggleEditClick()"
-    >Cancel
+      class="btn btn-warning" style="margin-right: 2rem; width: 9rem" (click)="onCancelEditClick()">Cancel
     </button>
     <button
-      class="btn btn-success"
-      style="width: 9rem"
-      (click)="onSaveSurveyEditClick()"
-    >Save
+      class="btn btn-success" style="width: 9rem" (click)="onSaveSurveyEditClick()">Save
     </button>
   </div>
 
@@ -36,7 +24,7 @@
   <h3>SURVEY TITLE:
     <div *ngIf="isEditingSurvey==false">{{survey.title | json | uppercase | slice: 1:-1}}</div>
   </h3>
-  <input class="m-3" *ngIf="isEditingSurvey==true" [(ngModel)]="survey.title">
+  <input class="m-3 text-center" *ngIf="isEditingSurvey==true" [(ngModel)]="survey.title">
 </div>
 
 <div class="container" style="border: solid black thin">

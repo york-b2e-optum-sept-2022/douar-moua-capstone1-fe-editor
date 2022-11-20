@@ -14,6 +14,9 @@ export class SurveyService {
   public viewSurveyList: boolean = false
   public $viewSurveyList = new Subject<boolean>()
 
+  public isEditingSurvey: boolean = false
+  public $isEditingSurvey = new Subject<boolean>()
+
   constructor(private httpService: HttpService) { }
 
   public createNewSurvey(newSurvey: ISurvey){
@@ -91,6 +94,14 @@ export class SurveyService {
         alert("Unable to save edits to survey, please try again later.")
       }
     })
+  }
+
+  public toggleEditSurvey(){
+    this.$isEditingSurvey.next(!this.isEditingSurvey)
+  }
+
+  public toggleEditSurveyCancel(){
+    this.$isEditingSurvey.next(this.isEditingSurvey)
   }
 
 }

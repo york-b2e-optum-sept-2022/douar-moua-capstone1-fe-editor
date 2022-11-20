@@ -92,6 +92,7 @@ export class SurveyInputComponent implements OnInit {
 
     console.log(this.newSurvey)
     this.surveyService.createNewSurvey(this.newSurvey)
+    this.cancelCreateSurveyClick()
   }
 
   cancelCreateSurveyClick() {

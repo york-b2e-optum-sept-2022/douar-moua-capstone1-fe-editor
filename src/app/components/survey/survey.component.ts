@@ -31,14 +31,20 @@ export class SurveyComponent implements OnInit, OnDestroy {
     this.surveySub.unsubscribe()
   }
 
-  toggleEditClick() {
+  onEditSurveyClick() {
     this.isEditingSurvey = !this.isEditingSurvey
+    this.surveyService.toggleEditSurvey()
+
   }
 
   onSaveSurveyEditClick(){
     console.log(this.survey)
     this.surveyService.saveEditSurvey(this.survey)
-    this.toggleEditClick()
+    this.onEditSurveyClick()
   }
 
+  onCancelEditClick() {
+    this.isEditingSurvey = !this.isEditingSurvey
+    this.surveyService.toggleEditSurveyCancel()
+  }
 }

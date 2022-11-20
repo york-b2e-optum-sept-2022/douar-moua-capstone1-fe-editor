@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SurveyService} from "./services/survey.service";
 import {Subscription} from "rxjs";
 
@@ -7,7 +7,7 @@ import {Subscription} from "rxjs";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy{
   title = 'douar-moua-capstone1-fe-editor';
 
   viewSurvey:boolean = false
@@ -35,5 +35,9 @@ export class AppComponent {
 
   cancelCreateSurvey(cancelCreate: boolean) {
     this.creatingSurvey = cancelCreate
+  }
+
+  ngOnDestroy(): void {
+    this.viewSurveySub.unsubscribe()
   }
 }

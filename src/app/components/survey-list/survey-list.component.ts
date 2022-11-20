@@ -28,7 +28,6 @@ export class SurveyListComponent implements OnInit, OnDestroy {
   }
 
   onViewSurveyClick(surveyId: number){
-    console.log(surveyId)
     this.surveyService.getSurveyById(surveyId)
     this.questionService.getSurveyQuestionList(<number>surveyId)
     this.viewSurvey.emit(!this.viewSurveyClick)

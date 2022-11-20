@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {IQuestion} from "../../_Interfaces/IQuestion";
 
 @Component({
@@ -9,10 +9,21 @@ import {IQuestion} from "../../_Interfaces/IQuestion";
 export class QuestionInputComponent implements OnInit {
 
   @Input() questionInput!: IQuestion
+  @Output() newQuestion: IQuestion = {
+    prompt: "",
+    responseType: ""
+  }
+
+  booleanResponse: String = "boolean-response"
+  multiResponse: String = "multi-response"
+  textResponse: String = "text-response"
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  checkInputs() {
+    console.log(this.newQuestion)
+  }
 }

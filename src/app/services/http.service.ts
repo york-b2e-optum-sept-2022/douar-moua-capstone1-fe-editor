@@ -51,4 +51,8 @@ export class HttpService {
     return this.httpClient.get(`http://localhost:8080/api/question?surveyId=${surveyId}`
     ) as Observable<IQuestion[]>
   }
+
+  public deleteQuestionById(questionId: number){
+    return this.httpClient.delete(`http://localhost:8080/api/question?questionId=${questionId}`)
+  }
 }

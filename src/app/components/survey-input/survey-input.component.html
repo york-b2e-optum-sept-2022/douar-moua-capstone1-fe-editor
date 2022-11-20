@@ -4,8 +4,7 @@
 
 
 
-<!-- --- CANCEL / SAVE BUTTONS --- -->
-
+<!-- --- CANCEL / SAVE NEW SURVEY BUTTONS --- -->
 <div class="d-flex justify-content-center">
   <button
     class="btn btn-warning m-3"
@@ -16,9 +15,7 @@
 </div>
 
 
-
 <!-- --- SURVEY INPUT --- -->
-
 <div class="container" style="border: solid black thin; padding: 2rem">
 
 <!--  SURVEY TITLE INPUT-->
@@ -37,7 +34,6 @@
     </div>
   </div>
 
-
 <!--  ADD QUESTION BUTTON-->
   <div class="text-center">
     <p style="color: red"><em>MUST SAVE SURVEY TITLE BEFORE ADDING QUESTIONS!</em></p>
@@ -46,39 +42,7 @@
     <button class="btn btn-primary mb-3" (click)="onAddNewQuestionToNewSurveyClick()">Add a Question</button>
   </div>
 
+<!--  LIST OF NEWLY ADDED QUESTIONS-->
   <app-question-input-list></app-question-input-list>
-
-
-<!--&lt;!&ndash;  QUESTION INPUT & RESPONSE TYPE SELECTION/INPUT&ndash;&gt;-->
-<!--  <div class="container" style="border: solid black thin; padding: 2rem">-->
-<!--&lt;!&ndash;    QUESTION INPUT&ndash;&gt;-->
-<!--    <div id="boolean-input" class="d-flex justify-content-center">-->
-<!--      <div class="input-group m-3">-->
-<!--        <span class="input-group-text">Question:</span>-->
-<!--        <input type="text" class="form-control">-->
-<!--      </div>-->
-<!--    </div>-->
-<!--&lt;!&ndash;    RESPONSE SELECTION/INPUT&ndash;&gt;-->
-<!--    <div class="text-center">-->
-<!--      <p>Select Type of Response</p>-->
-<!--      <div class="d-flex justify-content-center">-->
-
-<!--        <div style="margin-right: 3rem">-->
-<!--          <input type="checkbox">-->
-<!--          <label>&nbsp;True/False</label>-->
-<!--        </div>-->
-
-<!--        <div style="margin-right: 3rem">-->
-<!--          <input type="checkbox">-->
-<!--          <label>&nbsp;Multiple-Choice</label> <br>-->
-<!--        </div>-->
-
-<!--        <div style="margin-right: 3rem">-->
-<!--          <input type="checkbox">-->
-<!--          <label>&nbsp;Text</label>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
 
 </div>

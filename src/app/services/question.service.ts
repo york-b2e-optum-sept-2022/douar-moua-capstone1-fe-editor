@@ -25,12 +25,28 @@ export class QuestionService {
     })
   }
 
-  public addQuestionToNewSurvey(newQuestion: IQuestion){
+  public addQuestionToNewSurveyDisplay(newQuestion: IQuestion){
     let questionList: IQuestion[] = [...this.$newQuestionList.getValue()];
     questionList.push(newQuestion)
     console.log(questionList)
     return this.$newQuestionList.next(questionList)
   }
 
+  public deleteQuestionById(questionId: number){
+    this.httpService.deleteQuestionById(questionId).pipe(first()).subscribe({
+      next: () => {
+        let questionList: IQuestion[] = [...this.$questionList.getValue()];
+        this.$questionList.next(
+          questionList.filter(question => question.id !== questionId)
+        )
+        console.log(questionList)
+        this.$questionList.next(questionList)
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to delete question, please try again later.")
+      }
+    })
+  }
 
 }

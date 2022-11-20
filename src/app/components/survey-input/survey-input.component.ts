@@ -3,7 +3,6 @@ import {ISurvey} from "../../_Interfaces/ISurvey";
 import {SurveyService} from "../../services/survey.service";
 import {IQuestion} from "../../_Interfaces/IQuestion";
 import {QuestionService} from "../../services/question.service";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-survey-input',
@@ -23,16 +22,49 @@ export class SurveyInputComponent implements OnInit {
   savedNewSurveyTitleCheck: number = 0
 
   listQuestionInput: IQuestion[] = []
-  // listQuestionInputSub: Subscription
 
-  constructor(private surveyService: SurveyService, private questionService: QuestionService) {
-  }
+  constructor(private surveyService: SurveyService, private questionService: QuestionService) {}
 
   ngOnInit(): void {
   }
 
-  cancelCreateSurveyClick() {
-    this.creatingSurvey.emit(this.createSurvey)
+  onSaveNewSurveyTitleClick() {
+    if (this.newSurvey.title == ""){
+      alert("Please give survey a title!")
+      return;
+    }
+
+    if (this.savedNewSurveyTitleCheck < 1){
+      let newSurveyId: number = new Date().getTime()
+      let newSurvey: ISurvey = {
+        id: newSurveyId,
+        title: this.newSurvey.title
+      }
+      this.newSurvey = newSurvey
+    }
+    this.savedNewSurveyTitleCheck = this.savedNewSurveyTitleCheck + 1
+    alert("New Survey Title has been saved! You can now add questions!")
+
+  }
+
+  onAddNewQuestionToNewSurveyClick(){
+
+    if(this.savedNewSurveyTitleCheck < 1){
+      alert("Please add a survey title and click save before adding questions!")
+      return
+    }
+
+    let newQuestionId: number = new Date().getTime()
+    let newQuestion: IQuestion = {
+      id: newQuestionId,
+      surveyOwner: this.newSurvey,
+      prompt: ""
+    }
+
+    this.listQuestionInput.push(newQuestion)
+    this.questionService.addQuestionToNewSurveyDisplay(newQuestion)
+    console.log(newQuestion)
+    console.log(this.newSurvey)
   }
 
   onCreateSurveyClick(){
@@ -51,47 +83,20 @@ export class SurveyInputComponent implements OnInit {
       return
     }
 
-    // TODO: MOVE THIS TO SAVE TITLE NAME
-    let newSurveyId: number = new Date().getTime()
-    let newSurvey: ISurvey = {
-      id: newSurveyId,
-      title: this.newSurvey.title
-    }
+    // // TODO: MOVE THIS TO SAVE TITLE NAME
+    // let newSurveyId: number = new Date().getTime()
+    // let newSurvey: ISurvey = {
+    //   id: newSurveyId,
+    //   title: this.newSurvey.title
+    // }
 
     console.log(this.newSurvey)
-    this.surveyService.createNewSurvey(newSurvey)
+    this.surveyService.createNewSurvey(this.newSurvey)
+    this.cancelCreateSurveyClick()
   }
 
-  onAddNewQuestionToNewSurveyClick(){
-
-    let newQuestionId: number = new Date().getTime()
-    let newQuestion: IQuestion = {
-      id: newQuestionId,
-      surveyOwner: 0,
-      prompt: ""
-    }
-
-    this.listQuestionInput.push(newQuestion)
-    console.log(newQuestion)
-    console.log(this.listQuestionInput)
-    this.questionService.addQuestionToNewSurvey(newQuestion)
+  cancelCreateSurveyClick() {
+    this.creatingSurvey.emit(this.createSurvey)
   }
 
-  onSaveNewSurveyTitleClick() {
-    if (this.newSurvey.title == ""){
-      alert("Please give survey a title!")
-      return;
-    }
-
-
-    console.log(this.newSurvey.title)
-    this.savedNewSurveyTitleCheck = this.savedNewSurveyTitleCheck + 1
-    alert("New Survey Title has been saved! You can now add questions!")
-
-
-  }
-
-  // ngOnDestroy(): void {
-  //   this.listQuestionInputSub.unsubscribe()
-  // }
 }

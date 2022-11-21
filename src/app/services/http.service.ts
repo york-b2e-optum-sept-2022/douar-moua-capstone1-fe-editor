@@ -55,4 +55,13 @@ export class HttpService {
   public deleteQuestionById(questionId: number){
     return this.httpClient.delete(`http://localhost:8080/api/question?questionId=${questionId}`)
   }
+
+  public saveEditQuestion(updateQuestion: IQuestion){
+    return this.httpClient.put('http://localhost:8080/api/question',
+      {
+        id: updateQuestion.id,
+        prompt: updateQuestion.prompt,
+        responseType: updateQuestion.responseType
+      }) as Observable<IQuestion>
+  }
 }

@@ -49,4 +49,27 @@ export class QuestionService {
     })
   }
 
+  public saveQuestionUpdate(updateQuestion: IQuestion){
+    console.log(updateQuestion)
+    this.httpService.saveEditQuestion(updateQuestion).pipe(first()).subscribe({
+      next: updatedQuestion => {
+
+        let questionList: IQuestion[] = [...this.$questionList.getValue()];
+        this.$questionList.next(
+          questionList.map(question => {
+            if (question.id !== updatedQuestion.id){
+              return question
+            }
+            return updatedQuestion
+          })
+        )
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to update question, please try again later.")
+      }
+    })
+  }
+
+
 }

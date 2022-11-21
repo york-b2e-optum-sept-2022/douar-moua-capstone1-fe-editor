@@ -15,7 +15,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   isEditingSurvey: boolean = false
   isEditingSurveySub: Subscription
-  isEditing: boolean = false;
+  isEditingQuestion: boolean = false;
+
+  booleanResponse: String = "boolean-response"
+  multiResponse: String = "multi-response"
+  textResponse: String = "text-response"
 
   constructor(private questionService: QuestionService, private surveyService: SurveyService) {
     this.isEditingSurveySub = this.surveyService.$isEditingSurvey.subscribe(
@@ -27,7 +31,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   toggleEditClick() {
-    this.isEditing = !this.isEditing
+    this.isEditingQuestion = !this.isEditingQuestion
   }
 
   onDeleteQuestionClick(){
@@ -38,5 +42,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.isEditingSurveySub.unsubscribe()
+  }
+
+  onSaveEditQuestionClick() {
+    console.log(this.question)
+    this.questionService.saveQuestionUpdate(this.question)
+    this.isEditingQuestion = false
   }
 }

@@ -2,10 +2,27 @@
 
 <div class="card m-5 text-center">
   <div class="card-body">
-    Question {{question.id}}: {{question.prompt}}
+    <div *ngIf="isEditingQuestion==false">
+      <div>Question {{question.id}}: {{question.prompt}}</div>
+      <div>Response Type {{question.responseType}}</div>
+    </div>
+    <div *ngIf="isEditingQuestion==true">
+      <div class="mb-3">
+        <label>Question: </label><br>
+        <input class="form-control text-center" [(ngModel)]="question.prompt">
+      </div>
+      <label for="response-type">Select Type of Response Required For Question: </label>
+      <div>
+        <select [(ngModel)]="question.responseType" name="response-type" id="response-type">
+          <option value="boolean response" [ngValue]="booleanResponse">True/False</option>
+          <option value="multi-choice response" [ngValue]="multiResponse">Multiple-Choice</option>
+          <option value="text response" [ngValue]="textResponse">Text</option>
+        </select>
+      </div>
+    </div>
   </div>
   <div *ngIf="isEditingSurvey==true">
-    <div *ngIf="isEditing==false" class="card-footer">
+    <div *ngIf="isEditingQuestion==false" class="card-footer">
       <button
         class="btn btn-sm btn-outline-danger" style="width: 7rem; margin-right: 3rem" (click)="onDeleteQuestionClick()">Delete
       </button>
@@ -14,9 +31,9 @@
       </button>
     </div>
 
-    <div *ngIf="isEditing==true" class="card-footer">
+    <div *ngIf="isEditingQuestion==true" class="card-footer">
       <button class="btn btn-sm btn-warning" style="width: 7rem; margin-right: 3rem" (click)="toggleEditClick()">Cancel</button>
-      <button class="btn btn-sm btn-success" style="width: 7rem">Save</button>
+      <button class="btn btn-sm btn-success" style="width: 7rem" (click)="onSaveEditQuestionClick()">Save</button>
     </div>
   </div>
 

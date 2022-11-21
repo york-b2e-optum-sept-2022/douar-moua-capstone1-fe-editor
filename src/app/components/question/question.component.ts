@@ -17,6 +17,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
   isEditingSurveySub: Subscription
   isEditingQuestion: boolean = false;
 
+  deletedQuestion: boolean = false
+
   booleanResponse: String = "boolean-response"
   multiResponse: String = "multi-response"
   textResponse: String = "text-response"
@@ -37,7 +39,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
   onDeleteQuestionClick(){
     console.log(this.question.id)
     this.questionService.deleteQuestionById(<number>this.question.id)
-    alert("You've deleted the question! Your view will be updated upon coming back to this page.")
+    this.deletedQuestion=true
+    // alert("You've deleted the question! Your view will be updated upon coming back to this page.")
   }
 
   ngOnDestroy(): void {
@@ -47,6 +50,5 @@ export class QuestionComponent implements OnInit, OnDestroy {
   onSaveEditQuestionClick() {
     console.log(this.question)
     this.questionService.saveQuestionUpdate(this.question)
-    this.isEditingQuestion = false
   }
 }

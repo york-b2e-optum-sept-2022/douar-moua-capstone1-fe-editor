@@ -1,10 +1,10 @@
 <!--<div>Survey Owner: {{question.surveyOwner | json}}</div>-->
 
-<div class="card m-5 text-center">
+<div *ngIf="deletedQuestion==false" class="card m-5 text-center">
   <div class="card-body">
     <div *ngIf="isEditingQuestion==false">
       <div>Question {{question.id}}: {{question.prompt}}</div>
-      <div>Response Type {{question.responseType}}</div>
+      <div>Response Type: {{question.responseType | uppercase}}</div>
     </div>
     <div *ngIf="isEditingQuestion==true">
       <div class="mb-3">
@@ -37,4 +37,11 @@
     </div>
   </div>
 
+</div>
+
+<div *ngIf="deletedQuestion==true" class="card m-5 text-center" style="background: red">
+  <div class="card-body">
+    <div>Question {{question.id}}: {{question.prompt}}</div>
+    <div>Response Type: {{question.responseType | uppercase}}</div>
+  </div>
 </div>

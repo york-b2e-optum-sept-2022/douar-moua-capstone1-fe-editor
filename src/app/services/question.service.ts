@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
 import {BehaviorSubject, first} from "rxjs";
 import {IQuestion} from "../_Interfaces/IQuestion";
+import {ISurvey} from "../_Interfaces/ISurvey";
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,7 @@ export class QuestionService {
   public addQuestionToNewSurveyDisplay(newQuestion: IQuestion){
     let questionList: IQuestion[] = [...this.$newQuestionList.getValue()];
     questionList.push(newQuestion)
+    console.log(newQuestion)
     console.log(questionList)
     return this.$newQuestionList.next(questionList)
   }
@@ -71,5 +73,27 @@ export class QuestionService {
     })
   }
 
+  public addNewQuestionToNewSurvey(newQuestion: IQuestion){
+    let newSurveyQuestionList = [...this.$newQuestionList.getValue()]
+
+    let newQuestionId = new Date().getTime()
+    newQuestion.id = newQuestionId
+
+    let newQuestionIndex = newSurveyQuestionList.indexOf(newQuestion)
+
+    if (newQuestionIndex !== -1){
+      newSurveyQuestionList[newQuestionIndex] = newQuestion
+    }
+
+    console.log("new question index in list: ", newQuestion)
+    console.log("new question: ", newQuestionIndex)
+    console.log("question list: ", newSurveyQuestionList)
+    // this.httpService.addNewQuestions(newSurveyQuestionList, <ISurvey>newQuestion.surveyOwner)
+  }
+
+  public addNewQuestions(newQuestions: IQuestion[], newSurvey: ISurvey){
+    console.log(newQuestions, newSurvey)
+    this.httpService.addNewQuestions(newQuestions, newSurvey)
+  }
 
 }

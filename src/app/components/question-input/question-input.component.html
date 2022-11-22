@@ -24,6 +24,9 @@
   <div class="text-center mt-3">
     <button class="btn btn-danger">Delete Question</button>
   </div>
+  <div *ngIf="newQuestionAdded == false" class="text-center mt-3">
+    <button class="btn btn-success" (click)="onAddQuestionClick()">Add Question</button>
+  </div>
 
 </div>
 

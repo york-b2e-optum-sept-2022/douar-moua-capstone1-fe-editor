@@ -3,6 +3,7 @@ import {ISurvey} from "../../_Interfaces/ISurvey";
 import {SurveyService} from "../../services/survey.service";
 import {IQuestion} from "../../_Interfaces/IQuestion";
 import {QuestionService} from "../../services/question.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-survey-input',
@@ -22,8 +23,12 @@ export class SurveyInputComponent implements OnInit {
   savedNewSurveyTitleCheck: number = 0
 
   listQuestionInput: IQuestion[] = []
+  listQuestionInputSub: Subscription
 
-  constructor(private surveyService: SurveyService, private questionService: QuestionService) {}
+  constructor(private surveyService: SurveyService, private questionService: QuestionService) {
+    this.listQuestionInputSub = this.questionService.$newQuestionList.subscribe(
+      questionList => this.listQuestionInput = questionList)
+  }
 
   ngOnInit(): void {
   }
@@ -54,17 +59,13 @@ export class SurveyInputComponent implements OnInit {
       return
     }
 
-    let newQuestionId: number = new Date().getTime()
     let newQuestion: IQuestion = {
-      id: newQuestionId,
+      id: 0,
       surveyOwner: this.newSurvey,
       prompt: ""
     }
 
-    this.listQuestionInput.push(newQuestion)
     this.questionService.addQuestionToNewSurveyDisplay(newQuestion)
-    console.log(newQuestion)
-    console.log(this.newSurvey)
   }
 
   onCreateSurveyClick(){
@@ -83,20 +84,19 @@ export class SurveyInputComponent implements OnInit {
       return
     }
 
-    // // TODO: MOVE THIS TO SAVE TITLE NAME
-    // let newSurveyId: number = new Date().getTime()
-    // let newSurvey: ISurvey = {
-    //   id: newSurveyId,
-    //   title: this.newSurvey.title
-    // }
-
     console.log(this.newSurvey)
     this.surveyService.createNewSurvey(this.newSurvey)
+    this.questionService.addNewQuestions(this.listQuestionInput, this.newSurvey)
     this.cancelCreateSurveyClick()
   }
 
   cancelCreateSurveyClick() {
     this.creatingSurvey.emit(this.createSurvey)
+    this.listQuestionInput = []
   }
 
+  checkLocalData() {
+    console.log("new questions list: ", this.listQuestionInput)
+    console.log("new survey: ", this.newSurvey)
+  }
 }

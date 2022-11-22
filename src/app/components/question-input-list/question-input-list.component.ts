@@ -13,8 +13,6 @@ export class QuestionInputListComponent implements OnInit, OnDestroy {
   listQuestionInput: IQuestion[] = []
   listQuestionInputSub: Subscription
 
-  // @Input() createNewSurveyClicked: boolean = true
-
   constructor(private questionService: QuestionService) {
     this.listQuestionInputSub = this.questionService.$newQuestionList.subscribe(
       questionList => this.listQuestionInput = questionList)

@@ -43,6 +43,13 @@
   </div>
 
 <!--  LIST OF NEWLY ADDED QUESTIONS-->
-  <app-question-input-list></app-question-input-list>
+  <div *ngFor="let newQuestionData of listQuestionInput">
+    <app-question-input
+      [newQuestion]="newQuestionData"
+    ></app-question-input>
+  </div>
+<!--  <app-question-input-list></app-question-input-list>-->
+
+  <button (click)="checkLocalData()">CHECK LOCAL DATA</button>
 
 </div>

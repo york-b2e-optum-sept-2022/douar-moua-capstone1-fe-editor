@@ -3,6 +3,7 @@ import {ISurvey} from "../../_Interfaces/ISurvey";
 import {QuestionService} from "../../services/question.service";
 import {SurveyService} from "../../services/survey.service";
 import {Subscription} from "rxjs";
+import {IQuestion} from "../../_Interfaces/IQuestion";
 
 @Component({
   selector: 'app-survey',
@@ -13,6 +14,15 @@ export class SurveyComponent implements OnInit, OnDestroy {
 
   survey!: ISurvey;
   surveySub: Subscription;
+
+  newQuestion: IQuestion = {
+    prompt: "",
+    responseType: "",
+    surveyOwner: this.survey,
+  }
+  booleanResponse: String = "booleanResponse"
+  multiResponse: String = "multiResponse"
+  textResponse: String = "textResponse"
 
   isEditingSurvey: boolean = false
 
@@ -46,5 +56,15 @@ export class SurveyComponent implements OnInit, OnDestroy {
   onCancelEditClick() {
     this.isEditingSurvey = !this.isEditingSurvey
     this.surveyService.toggleEditSurveyCancel()
+  }
+
+  addNewQuestionToSurveyClick() {
+    if (this.newQuestion.prompt == "" || this.newQuestion.responseType == ""){
+      alert("Please add a question and response type!")
+      return
+    }
+
+    this.newQuestion.surveyOwner = this.survey
+    this.questionService.addNewQuestion(this.newQuestion)
   }
 }

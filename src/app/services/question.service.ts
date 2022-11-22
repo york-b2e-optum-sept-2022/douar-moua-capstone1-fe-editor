@@ -91,9 +91,44 @@ export class QuestionService {
     // this.httpService.addNewQuestions(newSurveyQuestionList, <ISurvey>newQuestion.surveyOwner)
   }
 
-  public addNewQuestions(newQuestions: IQuestion[], newSurvey: ISurvey){
-    console.log(newQuestions, newSurvey)
-    this.httpService.addNewQuestions(newQuestions, newSurvey)
+  public addNewQuestion(newQuestion: IQuestion){
+    this.httpService.addNewQuestion(newQuestion, <ISurvey>newQuestion.surveyOwner).pipe(first()).subscribe({
+      next: newQuestion => {
+        let questionList: IQuestion[] = [...this.$questionList.getValue()]
+        questionList.push(newQuestion)
+        this.$questionList.next(questionList)
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to add new question, please try again later.")
+      }
+    })
   }
+
+  public addNewSurveyQuestion(newQuestion: IQuestion){
+    console.log(newQuestion)
+    this.httpService.addNewQuestion(newQuestion, <ISurvey>newQuestion.surveyOwner).pipe(first()).subscribe({
+      next: newQuestion => {
+        let newQuestionList: IQuestion[] = [...this.$newQuestionList.getValue()]
+        newQuestionList.push(newQuestion)
+        this.$newQuestionList.next(newQuestionList)
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to add new question, please try again later.")
+      }
+    })
+  }
+
+  public cancelCreateResetNewQuestionList(){
+    let resetNewQuestionList: IQuestion[] = [...this.$newQuestionList.getValue()]
+    resetNewQuestionList = []
+    this.$newQuestionList.next(resetNewQuestionList)
+  }
+
+  // public addNewQuestions(newQuestions: IQuestion[], newSurvey: ISurvey){
+  //   console.log(newQuestions, newSurvey)
+  //   this.httpService.addNewQuestions(newQuestions, newSurvey)
+  // }
 
 }

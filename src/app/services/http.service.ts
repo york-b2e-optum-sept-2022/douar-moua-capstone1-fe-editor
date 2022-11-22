@@ -64,4 +64,12 @@ export class HttpService {
         responseType: updateQuestion.responseType
       }) as Observable<IQuestion>
   }
+
+  public addNewQuestions(newQuestions: IQuestion[], newSurvey: ISurvey){
+    console.log(newQuestions)
+    console.log(newSurvey.id)
+    return this.httpClient.post(`http://localhost:8080/api/question/questions?surveyId=${newSurvey.id}`,
+      {newQuestions: newQuestions
+      }) as Observable<IQuestion[]>
+  }
 }

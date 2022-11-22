@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {IQuestion} from "../../_Interfaces/IQuestion";
+import {QuestionService} from "../../services/question.service";
 
 @Component({
   selector: 'app-question-input',
@@ -8,19 +9,27 @@ import {IQuestion} from "../../_Interfaces/IQuestion";
 })
 export class QuestionInputComponent implements OnInit {
 
-  @Input() questionInput!: IQuestion
-  @Output() newQuestion: IQuestion = {
+  // @Input() questionInput!: IQuestion
+  @Input() newQuestion: IQuestion = {
     prompt: "",
-    responseType: ""
+    responseType: "",
   }
 
-  booleanResponse: String = "boolean-response"
-  multiResponse: String = "multi-response"
-  textResponse: String = "text-response"
+  booleanResponse: String = "booleanResponse"
+  multiResponse: String = "multiResponse"
+  textResponse: String = "textResponse"
 
-  constructor() { }
+  newQuestionAdded: boolean = false
+
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit(): void {
+  }
+
+  onAddQuestionClick(){
+    console.log(this.newQuestion)
+    this.questionService.addNewQuestionToNewSurvey(this.newQuestion)
+    this.newQuestionAdded = true
   }
 
   checkInputs() {

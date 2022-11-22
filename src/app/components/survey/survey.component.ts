@@ -59,11 +59,12 @@ export class SurveyComponent implements OnInit, OnDestroy {
   }
 
   addNewQuestionToSurveyClick() {
-    console.log(this.survey)
+    if (this.newQuestion.prompt == "" || this.newQuestion.responseType == ""){
+      alert("Please add a question and response type!")
+      return
+    }
 
     this.newQuestion.surveyOwner = this.survey
-    console.log(this.newQuestion)
-
     this.questionService.addNewQuestion(this.newQuestion)
   }
 }

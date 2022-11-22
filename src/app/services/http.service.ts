@@ -76,11 +76,11 @@ export class HttpService {
   }
 
   //TODO configure add several new questions
-  public addNewQuestions(newQuestions: IQuestion[], newSurvey: ISurvey){
-    console.log(newQuestions)
-    console.log(newSurvey.id)
-    return this.httpClient.post(`http://localhost:8080/api/question/questions?surveyId=${newSurvey.id}`,
-      {newQuestions: newQuestions
-      }) as Observable<IQuestion[]>
-  }
+  // public addNewQuestions(newQuestions: IQuestion[], newSurvey: ISurvey){
+  //   console.log(newQuestions)
+  //   console.log(newSurvey.id)
+  //   return this.httpClient.post(`http://localhost:8080/api/question/questions?surveyId=${newSurvey.id}`,
+  //     {newQuestions: newQuestions
+  //     }) as Observable<IQuestion[]>
+  // }
 }

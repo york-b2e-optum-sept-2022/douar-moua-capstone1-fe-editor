@@ -1,4 +1,5 @@
 <div class="d-flex justify-content-center">
+<!--  DELETE/EDIT BUTTONS-->
   <div *ngIf="isEditingSurvey==false">
     <button
       class="btn btn-danger" style="margin-right: 2rem; width: 9rem" (click)="onDeleteSurveyClick()">Delete Survey
@@ -7,6 +8,7 @@
       class="btn btn-warning" style="width: 9rem" (click)="onEditSurveyClick()">Edit Survey
     </button>
   </div>
+<!--  CANCEL EDIT/SAVE EDIT BUTTONS-->
   <div *ngIf="isEditingSurvey==true">
     <button
       class="btn btn-warning" style="margin-right: 2rem; width: 9rem" (click)="onCancelEditClick()">Cancel
@@ -18,12 +20,37 @@
 
 </div>
 
+<!--SURVEY VIEW/EDIT TITLE-->
 <div class="text-center mt-5">
   <h3>SURVEY TITLE:
     <div *ngIf="isEditingSurvey==false">{{survey.title | json | uppercase | slice: 1:-1}}</div>
   </h3>
   <input class="m-3 text-center" *ngIf="isEditingSurvey==true" [(ngModel)]="survey.title">
 </div>
+
+<!--ADD NEW QUESTION-->
+<div *ngIf="isEditingSurvey==true" class="container" style="border: solid black thin">
+  <div class="text-center m-3">
+    <p>Add New Question</p>
+    <div>
+      <input class="form-control text-center" placeholder="New Question" [(ngModel)]="newQuestion.prompt">
+    </div>
+    <div>
+      <p class="mt-3">Select Response Type: </p>
+      <select [(ngModel)]="newQuestion.responseType" name="response-type" id="response-type">
+        <option value="boolean response" [ngValue]="booleanResponse">True/False</option>
+        <option value="multi-choice response" [ngValue]="multiResponse">Multiple-Choice</option>
+        <option value="text response" [ngValue]="textResponse">Text</option>
+      </select>
+    </div>
+    <div class="mt-3">
+      <button class="btn btn-success" (click)="addNewQuestionToSurveyClick()">Add Question</button>
+    </div>
+  </div>
+
+</div>
+
+<hr *ngIf="isEditingSurvey==true">
 
 <div class="container" style="border: solid black thin">
   <app-question-list></app-question-list>

@@ -91,6 +91,20 @@ export class QuestionService {
     // this.httpService.addNewQuestions(newSurveyQuestionList, <ISurvey>newQuestion.surveyOwner)
   }
 
+  public addNewQuestion(newQuestion: IQuestion){
+    this.httpService.addNewQuestion(newQuestion, <ISurvey>newQuestion.surveyOwner).pipe(first()).subscribe({
+      next: newQuestion => {
+        let questionList: IQuestion[] = [...this.$questionList.getValue()]
+        questionList.push(newQuestion)
+        this.$questionList.next(questionList)
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to add new question, please try again later.")
+      }
+    })
+  }
+
   public addNewQuestions(newQuestions: IQuestion[], newSurvey: ISurvey){
     console.log(newQuestions, newSurvey)
     this.httpService.addNewQuestions(newQuestions, newSurvey)

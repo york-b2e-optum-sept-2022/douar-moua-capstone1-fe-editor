@@ -19,9 +19,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   deletedQuestion: boolean = false
 
-  booleanResponse: String = "boolean-response"
-  multiResponse: String = "multi-response"
-  textResponse: String = "text-response"
+  booleanResponse: String = "booleanResponse"
+  multiResponse: String = "multiResponse"
+  textResponse: String = "textResponse"
 
   constructor(private questionService: QuestionService, private surveyService: SurveyService) {
     this.isEditingSurveySub = this.surveyService.$isEditingSurvey.subscribe(

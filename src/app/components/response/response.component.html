@@ -1,1 +1,19 @@
-<p>response works!</p>
+<div class="text-center m-5">
+  <h3>SURVEY TITLE: {{response.surveyTitle | uppercase}}</h3>
+  <div>INSTANCE: {{response.instance}}</div>
+</div>
+
+<div class="container" style="border: solid black thin">
+  <div *ngFor="let response of responsesByInstance">
+      <div class="card m-3 text-center">
+        <div class="m-3">
+          Question: {{response.question}}
+        </div>
+        <div class="m-3">
+          Answer: {{response.answer}}
+        </div>
+      </div>
+  </div>
+</div>
+
+

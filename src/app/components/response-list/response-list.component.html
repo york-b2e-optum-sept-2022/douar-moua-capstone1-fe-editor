@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-center mt-5 mb-3">
+  <h2>List of Responses</h2>
+</div>
+
+<div class="container" style="border: solid black thin">
+  <div class="text-center">
+    <div class="card m-3" *ngFor="let response of responseList">
+      <div class="m-3" (click)="onViewSurveyClick(response.id)">ID: {{response.id}} | Title: {{response.surveyTitle}} </div>
+    </div>
+  </div>
+</div>

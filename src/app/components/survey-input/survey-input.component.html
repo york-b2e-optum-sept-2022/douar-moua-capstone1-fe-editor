@@ -4,11 +4,7 @@
 
 <!-- --- CANCEL / SAVE NEW SURVEY BUTTONS --- -->
 <div class="d-flex justify-content-center">
-  <button
-    class="btn btn-warning m-3"
-    (click)="cancelCreateSurveyClick()"
-  >Cancel
-  </button>
+  <button class="btn btn-warning m-3" (click)="cancelCreateSurveyClick()">Cancel</button>
   <button class="btn btn-success m-3" (click)="onCreateSurveyClick()">Create</button>
 </div>
 
@@ -27,11 +23,7 @@
       <span class="input-group-text">Survey Title</span>
       <input type="text" class="form-control" [(ngModel)]="newSurvey.title">
       <span>
-        <button
-          class="btn btn-primary"
-          style="margin-left: 1rem"
-          (click)="onSaveNewSurveyTitleClick()">Save
-        </button>
+        <button class="btn btn-primary" style="margin-left: 1rem" (click)="onSaveNewSurveyTitleClick()">Save</button>
       </span>
     </div>
 
@@ -41,21 +33,54 @@
 
   </div>
 
-<!--  ADD NEW QUESTION-->
-  <div class="container" style="border: solid black thin">
+<!--SET NUMBER OF QUESTIONS-->
+  <div *ngIf="savedNewSurveyTitleCheck==true" class="text-center m-3">
+    <input type="number" [(ngModel)]="numberOfQuestions" min="0">
+    <button class="btn btn-primary" style="margin-left: 3rem" (click)="setNumberOfQuestions()">Set Number of Questions</button>
+  </div>
+  <!--  ADD NEW QUESTION-->
+  <div *ngIf="setNumberOfQuestionsCheck==true" class="container" style="border: solid black thin">
     <div class="text-center m-3">
-      <p>Add New Question</p>
+      <h5>Add New Question</h5>
+
+<!--      QUESTION ORDER NUMBER INPUT-->
+      <div class="m-3">
+        Question Order Number:
+        <select [(ngModel)]="newQuestion.questionOrder" name="questionOrder" id="questionOrder">
+          <option *ngFor="let number of numberOfQuestionsArray">{{number}}</option>
+        </select>
+      </div>
+
+<!--      QUESTION INPUT-->
       <div>
         <input class="form-control text-center" placeholder="New Question" [(ngModel)]="newQuestion.prompt">
       </div>
+
+<!--      RESPONSE TYPE INPUT-->
       <div>
         <p class="mt-3">Select Response Type: </p>
-        <select [(ngModel)]="newQuestion.responseType" name="response-type" id="response-type">
-          <option value="boolean response" [ngValue]="booleanResponse">True/False</option>
-          <option value="multi-choice response" [ngValue]="multiResponse">Multiple-Choice</option>
-          <option value="text response" [ngValue]="textResponse">Text</option>
+        <select [(ngModel)]="newQuestion.responseType" (change)="toggleMultiChoiceAnswer()" name="response-type" id="response-type">
+          <option value="booleanResponse" [ngValue]="booleanResponse">True/False</option>
+          <option value="multiResponse" [ngValue]="multiResponse">Multiple-Choice</option>
+          <option value="textResponse" [ngValue]="textResponse">Text</option>
         </select>
       </div>
+
+<!--      MULTI CHOICE ANSWERS INPUT-->
+      <div *ngIf="multiChoiceSelect==true" class="text-center mt-3">
+        <div *ngIf="addMultiChoiceClickCount < 4">
+          <p>Add Up to 4 Multiple Choice Answers</p>
+          <div class="m-3">
+            <input [(ngModel)]="multiChoiceAnswer">
+            <button class="btn btn-sm btn-primary" style="margin-left: 3rem" (click)="addMultipleChoiceAnswer()"> Add Multiple Response Choice</button>
+          </div>
+        </div>
+        <div *ngFor="let choice of newQuestion.multiChoiceAnswers" class="m-3">
+          <span>Multiple Choice Answer:</span>
+          <div class="form-control m-3">{{choice}}</div>
+        </div>
+      </div>
+
       <div class="mt-3">
         <button class="btn btn-success" (click)="addNewQuestionToSurveyClick()">Add Question</button>
       </div>
@@ -65,7 +90,8 @@
   <div *ngFor="let newQuestion of newSurveyQuestionList" class="d-flex justify-content-center mt-3">
     <div class="container" style="border: solid black thin">
       <div class="m-3">
-        <div>Question #: {{newQuestion.id}}</div>
+        <div>Question ID: {{newQuestion.id}}</div>
+        <div>Question #: {{newQuestion.questionOrder}}</div>
         <div>Question: {{newQuestion.prompt}}</div>
         <div>Response Type: {{newQuestion.responseType}}</div>
       </div>

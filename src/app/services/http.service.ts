@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ISurvey} from "../_Interfaces/ISurvey";
 import {IQuestion} from "../_Interfaces/IQuestion";
+import {IResponse} from "../_Interfaces/IResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -83,4 +84,16 @@ export class HttpService {
   //     {newQuestions: newQuestions
   //     }) as Observable<IQuestion[]>
   // }
+
+  // --- RESPONSE STUFF ---
+
+  public getResponseList(){
+    return this.httpClient.get('http://localhost:8080/api/response/all-responses'
+    ) as Observable<IResponse[]>
+  }
+
+  public getResponseById(responseId: number){
+    return this.httpClient.get(`http://localhost:8080/api/response?responseId=${responseId}`
+    ) as Observable<IResponse>
+  }
 }

@@ -6,4 +6,6 @@ export interface IQuestion{
   prompt: string,
   answer?: string,
   responseType?: string
+  multiChoiceAnswers?: string[],
+  questionOrder?: number
 }

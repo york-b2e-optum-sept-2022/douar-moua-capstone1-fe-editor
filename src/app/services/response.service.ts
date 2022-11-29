@@ -10,6 +10,7 @@ export class ResponseService {
 
   public $responseList = new BehaviorSubject<IResponse[]>([])
   public $response = new BehaviorSubject<IResponse | null>(null)
+  public $responsesByInstance = new BehaviorSubject<IResponse[]>([])
 
   constructor(private httpService: HttpService) { }
 
@@ -33,6 +34,18 @@ export class ResponseService {
       error: err => {
         console.error(err)
         alert("Unable to get completed response, please try again later.")
+      }
+    })
+  }
+
+  public getResponsesByInstance(instance: number){
+    this.httpService.getResponsesByInstance(instance).pipe(first()).subscribe({
+      next: responsesByInstance => {
+        this.$responsesByInstance.next(responsesByInstance)
+      },
+      error: err => {
+        console.error(err)
+        alert("Unable to get responses, please try again later.")
       }
     })
   }

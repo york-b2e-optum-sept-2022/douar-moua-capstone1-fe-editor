@@ -25,8 +25,9 @@ export class ResponseListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onViewSurveyClick(responseId: number) {
-    this.responseService.getResponseById(responseId)
+  onViewSurveyClick(response: IResponse) {
+    this.responseService.getResponseById(response.id)
+    this.responseService.getResponsesByInstance(response.instance)
     this.viewResponse.emit(!this.viewResponseClick)
   }
 

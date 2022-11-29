@@ -4,5 +4,6 @@ export interface IResponse{
   surveyId: number,
   surveyTitle: string,
   questionId: number,
-  question: string
+  question: string,
+  instance: number
 }

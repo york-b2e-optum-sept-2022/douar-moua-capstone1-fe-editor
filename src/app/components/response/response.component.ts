@@ -13,7 +13,14 @@ export class ResponseComponent implements OnInit {
   response!: IResponse;
   responseSub: Subscription;
 
+  responsesByInstance: IResponse[] = [];
+  responsesByInstanceSub: Subscription;
+
   constructor(private responseService: ResponseService) {
+    this.responsesByInstanceSub = this.responseService.$responsesByInstance.subscribe(
+      responsesByInstance => this.responsesByInstance = <IResponse[]>responsesByInstance
+    )
+
     this.responseSub = this.responseService.$response.subscribe(
       response => this.response = <IResponse>response
     )
@@ -23,7 +30,7 @@ export class ResponseComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.responseSub.unsubscribe()
+    this.responsesByInstanceSub.unsubscribe()
   }
 
 }

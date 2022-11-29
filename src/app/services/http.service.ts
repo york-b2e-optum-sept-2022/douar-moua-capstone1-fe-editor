@@ -96,4 +96,9 @@ export class HttpService {
     return this.httpClient.get(`http://localhost:8080/api/response?responseId=${responseId}`
     ) as Observable<IResponse>
   }
+
+  public getResponsesByInstance(instance: number){
+    return this.httpClient.get(`http://localhost:8080/api/response/instance?instance=${instance}`
+    ) as Observable<IResponse[]>
+  }
 }

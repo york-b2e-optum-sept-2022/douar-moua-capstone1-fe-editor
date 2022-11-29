@@ -1,11 +1,11 @@
-<!--<div>Survey Owner: {{question.surveyOwner | json}}</div>-->
-
 <div *ngIf="deletedQuestion==false" class="card m-5 text-center">
   <div class="card-body">
+
     <div *ngIf="isEditingQuestion==false">
       <div>Question {{question.id}}: {{question.prompt}}</div>
       <div>Response Type: {{question.responseType | uppercase}}</div>
     </div>
+
     <div *ngIf="isEditingQuestion==true">
       <div class="mb-3">
         <label>Question: </label><br>
@@ -21,7 +21,9 @@
       </div>
     </div>
   </div>
+
   <div *ngIf="isEditingSurvey==true">
+
     <div *ngIf="isEditingQuestion==false" class="card-footer">
       <button
         class="btn btn-sm btn-outline-danger" style="width: 7rem; margin-right: 3rem" (click)="onDeleteQuestionClick()">Delete
@@ -35,6 +37,7 @@
       <button class="btn btn-sm btn-warning" style="width: 7rem; margin-right: 3rem" (click)="toggleEditClick()">Cancel</button>
       <button class="btn btn-sm btn-success" style="width: 7rem" (click)="onSaveEditQuestionClick()">Save</button>
     </div>
+
   </div>
 
 </div>

@@ -24,10 +24,21 @@ export class SurveyInputComponent implements OnInit, OnDestroy {
     prompt: "",
     responseType: "",
     surveyOwner: this.newSurvey,
+    multiChoiceAnswers: [],
+    questionOrder: 0
   }
+
+  numberOfQuestions: number = 0
+  numberOfQuestionsArray: [] = []
+  setNumberOfQuestionsCheck: boolean = false
+
   booleanResponse: String = "booleanResponse"
   multiResponse: String = "multiResponse"
   textResponse: String = "textResponse"
+
+  multiChoiceAnswer: string = ""
+  multiChoiceSelect: boolean = false
+  addMultiChoiceClickCount: number = 0
 
   savedNewSurveyTitleCheck: boolean = false
   addedNewQuestionCheck: number = 0
@@ -56,15 +67,20 @@ export class SurveyInputComponent implements OnInit, OnDestroy {
     this.newSurvey = newSurvey
 
     this.surveyService.createNewSurvey(this.newSurvey)
-    alert("New Survey Title has been saved! You can now add questions!")
     this.savedNewSurveyTitleCheck = true
   }
 
   addNewQuestionToSurveyClick() {
-    if (this.savedNewSurveyTitleCheck == false){
-      alert("Please add title and click save before adding questions!")
+    if (this.newQuestion.prompt == ""){
+      alert("Please add question!")
       return
     }
+
+    let newNumberOfQuestions = this.numberOfQuestionsArray.filter(number => number !== this.newQuestion.questionOrder)
+    this.numberOfQuestionsArray = <[]>newNumberOfQuestions
+    console.log(this.newQuestion.questionOrder)
+    console.log(this.numberOfQuestionsArray.filter(number => number !== this.newQuestion.questionOrder))
+
     this.addedNewQuestionCheck = this.addedNewQuestionCheck + 1
     this.newQuestion.surveyOwner = this.newSurvey
     this.questionService.addNewSurveyQuestion(this.newQuestion)
@@ -92,10 +108,38 @@ export class SurveyInputComponent implements OnInit, OnDestroy {
     this.creatingSurvey.emit(this.createSurvey)
   }
 
+  setNumberOfQuestions() {
+    if (this.numberOfQuestions < 0) {
+      this.numberOfQuestions = 0
+      alert("Number of questions must be more than 0!")
+      return;
+    }
+
+    if (this.numberOfQuestions > 0){
+      this.numberOfQuestionsArray = []
+      for (let i = 0; i < this.numberOfQuestions; i++){
+        // @ts-ignore
+        this.numberOfQuestionsArray.push(i + 1)
+      }
+      this.setNumberOfQuestionsCheck = true
+    }
+
+  }
+
+  toggleMultiChoiceAnswer(){
+    if (this.newQuestion.responseType == this.multiResponse){
+      this.multiChoiceSelect = true;
+    }
+  }
+
+  addMultipleChoiceAnswer(){
+    this.newQuestion.multiChoiceAnswers?.push(this.multiChoiceAnswer)
+    this.addMultiChoiceClickCount = this.addMultiChoiceClickCount + 1
+  }
+
   ngOnDestroy(): void {
     this.newSurveyQuestionListSub.unsubscribe()
   }
-
 
   // onAddNewQuestionToNewSurveyClick(){
   //
@@ -112,4 +156,5 @@ export class SurveyInputComponent implements OnInit, OnDestroy {
   //
   //   this.questionService.addQuestionToNewSurveyDisplay(newQuestion)
   // }
+
 }

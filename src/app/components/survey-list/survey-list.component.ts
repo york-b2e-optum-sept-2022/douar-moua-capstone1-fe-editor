@@ -24,7 +24,6 @@ export class SurveyListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.surveyService.getSurveyList()
   }
 
   onViewSurveyClick(surveyId: number){

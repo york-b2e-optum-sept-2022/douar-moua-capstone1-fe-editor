@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ResponseService} from "../../services/response.service";
+import {Subscription} from "rxjs";
+import {IResponse} from "../../_Interfaces/IResponse";
 
 @Component({
   selector: 'app-response-list',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResponseListComponent implements OnInit {
 
-  constructor() { }
+  responseList: IResponse[] = []
+  responseListSub: Subscription
+
+  @Output() viewResponse = new EventEmitter<boolean>()
+  viewResponseClick: boolean = false
+
+  constructor(private responseService: ResponseService) {
+    this.responseListSub = this.responseService.$responseList.subscribe(
+      responseList => this.responseList = responseList
+    )
+  }
 
   ngOnInit(): void {
+  }
+
+  onViewSurveyClick(responseId: number) {
+    this.responseService.getResponseById(responseId)
+    this.viewResponse.emit(!this.viewResponseClick)
+  }
+
+  ngOnDestroy(): void {
+    this.responseListSub.unsubscribe();
   }
 
 }
